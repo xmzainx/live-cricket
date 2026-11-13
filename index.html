@@ -3,21 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Live Cricket - Real Live Score | PSL, IPL, ICC World Cup</title>
-<meta name="description" content="Real Live Cricket Score with CricAPI, PSL, IPL, ICC, Asia Cup. Live Commentary, Schedule, Points Table.">
+<title>Live Cricket - Free Live Score | PSL, IPL, ICC, Asia Cup | No API Key</title>
+<meta name="description" content="Free Live Cricket Score without API key. PSL, IPL, ICC World Cup, Asia Cup, Big Bash Live Score, Schedule, Points Table.">
 <style>
 *{box-sizing:border-box} body{margin:0;font-family:Arial;background:#0a0f1a;color:#111}
 header{background:#0a0f1a;color:white;padding:14px 18px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:100;flex-wrap:wrap}
 header a{color:white;text-decoration:none;margin:0 7px;font-size:13px;cursor:pointer}
 .logo{font-weight:900;font-size:22px;color:#00e676} .logo span{color:#ffc107}
 .liveDot{background:red;color:white;padding:3px 8px;border-radius:20px;font-size:11px;animation:blink 1s infinite} @keyframes blink{50%{opacity:.4}}
-.hero{background:linear-gradient(135deg,#0a3d1a,#0a0f1a);color:white;text-align:center;padding:35px 15px}
+.hero{background:linear-gradient(135deg,#0a3d1a,#0a0f1a);color:white;text-align:center;padding:32px 15px}
 .container{max-width:1000px;margin:auto;padding:15px}
 .card{background:white;padding:18px;border-radius:16px;margin:14px 0}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px} @media(max-width:600px){.grid{grid-template-columns:1fr}}
 .match{border:2px solid #eee;border-radius:14px;padding:14px;margin-bottom:12px} .match.live{border-color:red}
 .team{display:flex;justify-content:space-between;font-weight:bold;font-size:16px;margin:6px 0}
-.score{color:#0a7a4a} 
+.score{color:#0a7a4a}
 button{background:#00c853;color:white;border:none;padding:11px;border-radius:10px;font-weight:bold;width:100%;cursor:pointer;margin-top:7px}
 button.red{background:#d32f2f} button.dark{background:#0a0f1a} button.yellow{background:#ffc107;color:#000} button.small{width:auto;padding:7px 14px;font-size:13px}
 input,select{width:100%;padding:12px;border:1px solid #ddd;border-radius:10px;margin:7px 0}
@@ -27,117 +26,156 @@ footer{background:#000;color:#ccc;text-align:center;padding:22px;font-size:13px;
 .page{display:none} .page.active{display:block}
 #cookie{position:fixed;bottom:0;left:0;right:0;background:#111;color:white;padding:13px;display:flex;justify-content:space-between;z-index:999}
 .commentary{background:#f7f7f7;padding:10px;border-radius:10px;margin:6px 0;font-size:13px;border-left:4px solid #00c853}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px} @media(max-width:600px){.grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
-
 <header>
 <div class="logo">LIVE <span>CRICKET</span></div>
 <nav>
-<a onclick="showPage('home')">Live Score</a>
-<a onclick="showPage('schedule')">Schedule</a>
-<a onclick="showPage('points')">Points Table</a>
-<a onclick="showPage('watch')">How To Watch</a>
-<a onclick="showPage('about')">About</a>
-<a onclick="showPage('privacy')">Privacy</a>
-<a onclick="showPage('contact')">Contact</a>
+<a onclick="showPage('home')">Live Score</a><a onclick="showPage('schedule')">Schedule</a><a onclick="showPage('points')">Points Table</a><a onclick="showPage('watch')">How To Watch</a><a onclick="showPage('contact')">Contact</a>
 </nav>
 </header>
 
 <div id="page-home" class="page active">
 <div class="hero">
-<span class="liveDot">● LIVE NOW - REAL API</span>
+<span class="liveDot">● LIVE - FREE API - NO KEY</span>
 <h1>Live Cricket Score</h1>
-<p>ICC World Cup • PSL • IPL • Asia Cup • Big Bash • All Tournaments</p>
+<p>ICC • PSL • IPL • Asia Cup • Big Bash • All Tournaments</p>
 <p id="liveClock" style="font-size:13px;opacity:.8"></p>
-<p id="apiStatus" style="font-size:12px;color:#ffc107"></p>
+<p id="apiStatus" style="color:#ffc107;font-size:13px"></p>
 </div>
 <div class="container">
 <div class="card">
-<h2>🔴 Live & Recent Matches - Real Data</h2>
-<div id="liveMatches"><p>Loading real live scores...</p></div>
+<h2>🔴 Live Matches - Real Time</h2>
+<div id="liveMatches"><p>Loading live scores...</p></div>
 <button onclick="loadLive()">↻ Refresh Live Score</button>
 </div>
 <div class="card">
-<h2>🎥 Watch Live - Official & Legal</h2>
-<select id="country" onchange="showBroadcaster()">
-<option value="Pakistan">Pakistan</option>
-<option value="India">India</option>
-<option value="USA">USA / Canada</option>
-<option value="UK">UK</option>
-<option value="Australia">Australia</option>
-<option value="UAE">UAE / Gulf</option>
-</select>
-<div id="broadcaster" style="margin-top:10px"></div>
+<h2>🎥 Watch Live - Official Links</h2>
+<div class="grid">
+<div><b>Pakistan - Tamasha (Free)</b><br><a href="https://tamashaweb.com/" target="_blank"><button class="red">Open Tamasha Website</button></a><a href="https://play.google.com/store/apps/details?id=com.jazz.tamasha" target="_blank"><button class="dark">Tamasha on Play Store</button></a></div>
+<div><b>Pakistan - PTV Sports</b><br><a href="https://www.ptvsports.pk/" target="_blank"><button class="red">Open PTV Sports</button></a></div>
+<div><b>India - JioHotstar</b><br><a href="https://www.hotstar.com/in/sports/cricket" target="_blank"><button class="red">Open Hotstar</button></a></div>
+<div><b>USA - Willow TV</b><br><a href="https://www.willow.tv/" target="_blank"><button class="red">Open Willow TV</button></a></div>
+<div><b>UK - Sky Sports</b><br><a href="https://www.skysports.com/cricket" target="_blank"><button class="red">Open Sky Sports</button></a></div>
+<div><b>Live Score - ESPN</b><br><a href="https://www.espncricinfo.com/live-cricket-score" target="_blank"><button class="yellow">Open ESPN Live Score</button></a></div>
 </div>
-<div class="card">
-<h2>💬 Live Commentary / Status</h2>
-<div id="commentaryBox"><p>Select any match below to see commentary.</p></div>
 </div>
+<div class="card"><h2>💬 Live Status</h2><div id="commentaryBox"></div></div>
+<div class="card"><h2>🏆 Tournaments</h2><div class="tabs"><button onclick="filterT('all')" class="active">All</button><button onclick="filterT('ICC')">ICC</button><button onclick="filterT('PSL')">PSL</button><button onclick="filterT('IPL')">IPL</button></div><div id="tournamentList" style="margin-top:10px"></div></div>
 </div>
 </div>
 
-<div id="page-schedule" class="page"><div class="container"><div class="card"><h1>Full Schedule - Real API</h1><div id="scheduleList">Loading...</div></div></div></div>
-<div id="page-points" class="page"><div class="container"><div class="card"><h1>Points Table</h1>
-<table><tr><th>Team</th><th>P</th><th>W</th><th>L</th><th>Pts</th><th>NRR</th></tr>
-<tr><td>🇵🇰 Pakistan</td><td>5</td><td>4</td><td>1</td><td>8</td><td>+0.85</td></tr>
-<tr><td>🇮🇳 India</td><td>5</td><td>4</td><td>1</td><td>8</td><td>+0.72</td></tr>
-<tr><td>🇦🇺 Australia</td><td>5</td><td>3</td><td>2</td><td>6</td><td>+0.45</td></tr>
-<tr><td>🇳🇿 New Zealand</td><td>5</td><td>3</td><td>2</td><td>6</td><td>+0.21</td></tr>
-<tr><td>🏴 England</td><td>5</td><td>2</td><td>3</td><td>4</td><td>-0.12</td></tr>
-<tr><td>🇿🇦 South Africa</td><td>5</td><td>2</td><td>3</td><td>4</td><td>-0.30</td></tr>
-</table></div></div></div>
-<div id="page-watch" class="page"><div class="container"><div class="card"><h1>How To Watch Live Cricket - Legal Way</h1>
-<h3>Pakistan</h3><p><b>Tamasha App (Free), PTV Sports, A Sports, Tapmad</b></p>
-<h3>India</h3><p><b>JioHotstar, Star Sports</b></p>
-<h3>USA</h3><p><b>Willow TV, ESPN+</b></p>
-<h3>UK</h3><p><b>Sky Sports Cricket</b></p>
-<h3>Australia</h3><p><b>Fox Sports, Kayo Sports</b></p>
-<p style="background:#fff3cd;padding:12px;border-radius:10px">⚠️ Warning: Unknown APK se streaming mat karo, data chori hota hai. Sirf Play Store official apps use karo.</p>
-</div></div></div>
-<div id="page-about" class="page"><div class="container"><div class="card"><h1>About Us</h1><p>Live Cricket provides fast live scores via CricAPI, ball-by-ball status, schedule and points table. We do not host illegal video streams. We only link to official broadcasters.</p></div></div></div>
-<div id="page-privacy" class="page"><div class="container"><div class="card"><h1>Privacy Policy</h1><p>We use cookies for AdSense. We do not host copyrighted video content.</p></div></div></div>
-<div id="page-terms" class="page"><div class="container"><div class="card"><h1>Terms</h1><p>Scores are for information only. Video rights belong to respective broadcasters.</p></div></div></div>
-<div id="page-contact" class="page"><div class="container"><div class="card"><h1>Contact Us</h1><p><b>Email:</b> 8bpahg321@gmail.com</p><form onsubmit="alert('Message received');return false"><input placeholder="Your Name" required><input placeholder="Your Email" required><textarea placeholder="Message" required></textarea><button type="submit">Send</button></form></div></div></div>
+<div id="page-schedule" class="page"><div class="container"><div class="card"><h1>Upcoming Schedule</h1><div id="scheduleList">Loading...</div><button onclick="loadSchedule()">Refresh Schedule</button></div></div></div>
+<div id="page-points" class="page"><div class="container"><div class="card"><h1>Points Table</h1><table><tr><th>Team</th><th>P</th><th>W</th><th>L</th><th>Pts</th><th>NRR</th></tr><tr><td>Pakistan</td><td>5</td><td>4</td><td>1</td><td>8</td><td>+0.85</td></tr><tr><td>India</td><td>5</td><td>4</td><td>1</td><td>8</td><td>+0.72</td></tr><tr><td>Australia</td><td>5</td><td>3</td><td>2</td><td>6</td><td>+0.45</td></tr><tr><td>New Zealand</td><td>5</td><td>3</td><td>2</td><td>6</td><td>+0.21</td></tr><tr><td>England</td><td>5</td><td>2</td><td>3</td><td>4</td><td>-0.12</td></tr></table></div></div></div>
+<div id="page-watch" class="page"><div class="container"><div class="card"><h1>How To Watch</h1><p><b>Pakistan:</b> Tamasha App Free - Play Store se download karo. PTV Sports TV pe.</p><p><b>India:</b> JioHotstar</p><p><b>USA:</b> Willow TV</p><p><b>UK:</b> Sky Sports</p></div></div></div>
+<div id="page-contact" class="page"><div class="container"><div class="card"><h1>Contact</h1><p><b>Email:</b> 8bpahg321@gmail.com</p><form onsubmit="alert('Message received');return false"><input placeholder="Your Name" required><input placeholder="Your Email" required><textarea placeholder="Message" required></textarea><button type="submit">Send</button></form></div></div></div>
 
-<footer><a onclick="showPage('about')">About</a>|<a onclick="showPage('privacy')">Privacy</a>|<a onclick="showPage('terms')">Terms</a>|<a onclick="showPage('contact')">Contact</a><br>© 2026 Live Cricket. Real Score via CricAPI.</footer>
-<div id="cookie"><span>We use cookies for ads & score updates.</span><button onclick="acceptCookie()" style="width:auto;padding:8px 20px">Accept</button></div>
+<footer>© 2026 Live Cricket. Free Live Score - No API Key Needed.</footer>
+<div id="cookie"><span>We use cookies.</span><button onclick="acceptCookie()" style="width:auto;padding:8px 20px">Accept</button></div>
 
 <script>
-const API_KEY = "2189312f-99a3-4758-beca-48132d8fd7fb";
 let allMatches = [];
 function showPage(p){ document.querySelectorAll('.page').forEach(e=>e.classList.remove('active')); document.getElementById('page-'+p).classList.add('active'); window.scrollTo(0,0); if(p=='schedule') loadSchedule(); }
 
+// BINA KEY WALA FREE API - CRICBUZZ VIA PROXY
+async function fetchCricbuzz(endpoint){
+  let url = "https://www.cricbuzz.com/api/cricket/matches/v1/" + endpoint;
+  // Try 1: Direct
+  try{ let r = await fetch(url, {headers:{'User-Agent':'Mozilla/5.0'}}); if(r.ok) return await r.json(); }catch(e){}
+  // Try 2: AllOrigins Proxy
+  try{ let r2 = await fetch("https://api.allorigins.win/raw?url=" + encodeURIComponent(url)); if(r2.ok) return await r2.json(); }catch(e){}
+  // Try 3: CorsProxy
+  try{ let r3 = await fetch("https://corsproxy.io/?url=" + encodeURIComponent(url)); if(r3.ok) return await r3.json(); }catch(e){}
+  throw new Error("All proxies failed");
+}
+
+function parseMatches(data){
+  let out = [];
+  if(!data.typeMatches) return out;
+  data.typeMatches.forEach(tm=>{
+    if(tm.seriesMatches) tm.seriesMatches.forEach(sm=>{
+      if(sm.seriesAdWrapper && sm.seriesAdWrapper.matches){
+        sm.seriesAdWrapper.matches.forEach(m=>{
+          let info = m.matchInfo;
+          let score = m.matchScore || {};
+          out.push({
+            name: (info.team1?.teamName||"") + " vs " + (info.team2?.teamName||"") + " - " + (info.seriesName||""),
+            series: info.seriesName||"",
+            status: info.status||"",
+            venue: info.venueInfo?.ground||"",
+            team1: info.team1?.teamName||"Team 1",
+            team2: info.team2?.teamName||"Team 2",
+            s1: score.team1Score ? `${score.team1Score.inngs1?.runs||0}/${score.team1Score.inngs1?.wickets||0} (${score.team1Score.inngs1?.overs||0} ov)` : "Yet to bat",
+            s2: score.team2Score ? `${score.team2Score.inngs1?.runs||0}/${score.team2Score.inngs1?.wickets||0} (${score.team2Score.inngs1?.overs||0} ov)` : "Yet to bat",
+            state: info.state||""
+          });
+        });
+      }
+    });
+  });
+  return out;
+}
+
 async function loadLive(){
-  document.getElementById('apiStatus').innerText = "Connecting to CricAPI...";
+  document.getElementById('apiStatus').innerText = "Connecting to Free Live API...";
   document.getElementById('liveMatches').innerHTML = "<p>Loading real live scores...</p>";
   try{
-    let res = await fetch(`https://api.cricapi.com/v1/currentMatches?apikey=${API_KEY}&offset=0`);
-    let data = await res.json();
-    if(!data.data || data.data.length==0) throw new Error("No data");
-    allMatches = data.data;
-    document.getElementById('apiStatus').innerText = "✅ Connected! Real API Working - " + allMatches.length + " matches found";
-    renderMatches(allMatches);
-    // Show first live commentary
-    let first = allMatches[0];
-    document.getElementById('commentaryBox').innerHTML = `<div class="commentary"><b>${first.name}</b><br>${first.status || 'Live'}</div>`;
+    let data = await fetchCricbuzz("live");
+    let list = parseMatches(data);
+    if(list.length==0) throw new Error("No live matches right now");
+    allMatches = list;
+    document.getElementById('apiStatus').innerText = "✅ Connected! " + list.length + " Live Matches - Free API Working - No Key Needed";
+    renderMatches(list);
+    document.getElementById('commentaryBox').innerHTML = `<div class="commentary"><b>${list[0].name}</b><br>${list[0].status}</div>`;
   }catch(e){
-    document.getElementById('apiStatus').innerText = "⚠️ API busy / limit. Showing backup matches. 1 minute baad Refresh dabao.";
-    // Backup - jab API limit khatam ho
+    // Agar live koi match nahi hai, to recent matches dikhao - taake website khaali na lage
+    try{
+      let data2 = await fetchCricbuzz("recent");
+      let list2 = parseMatches(data2);
+      if(list2.length>0){
+        allMatches = list2;
+        document.getElementById('apiStatus').innerText = "✅ Connected! No live match right now, showing recent matches. Live match aate hi yahan aa jayega.";
+        renderMatches(list2);
+        return;
+      }
+    }catch(e2){}
+    document.getElementById('apiStatus').innerText = "⚠️ Live match nahi hai ya internet slow hai. Backup dikhaya ja raha hai.";
     let backup = [
-      {name:"Pakistan vs India - ICC T20 World Cup", status:"Pakistan need 12 runs in 12 balls", teamInfo:[{name:"Pakistan", shortname:"PAK"},{name:"India", shortname:"IND"}], score:[{inning:"Pakistan Inning", r:175, w:4, o:18.2},{inning:"India Inning", r:172, w:6, o:20}], matchStarted:true, matchEnded:false},
-      {name:"Karachi Kings vs Lahore Qalandars - PSL", status:"Lahore need 24 runs in 24 balls", teamInfo:[{name:"Karachi Kings", shortname:"KK"},{name:"Lahore Qalandars", shortname:"LQ"}], score:[{inning:"KK", r:165, w:5, o:20},{inning:"LQ", r:142, w:3, o:16}], matchStarted:true, matchEnded:false}
+      {name:"Pakistan vs India - ICC T20 World Cup", series:"ICC", status:"Pakistan need 12 runs in 12 balls - Live", team1:"Pakistan", team2:"India", s1:"175/4 (18.2 ov)", s2:"172/6 (20 ov)", state:"Live", venue:"Dubai"},
+      {name:"Karachi Kings vs Lahore Qalandars - PSL", series:"PSL", status:"Lahore need 24 runs in 24 balls", team1:"Karachi Kings", team2:"Lahore Qalandars", s1:"165/5 (20 ov)", s2:"142/3 (16 ov)", state:"Live", venue:"Gaddafi Stadium"},
+      {name:"Mumbai Indians vs CSK - IPL", series:"IPL", status:"CSK need 31 in 12 balls", team1:"Mumbai Indians", team2:"Chennai Super Kings", s1:"210/4 (20 ov)", s2:"180/5 (18 ov)", state:"Live", venue:"Wankhede"}
     ];
     allMatches = backup;
     renderMatches(backup);
   }
 }
 function renderMatches(list){
-  let h = "";
-  list.slice(0,12).forEach((m,i)=>{
-    let t1 = m.teamInfo ? m.teamInfo[0]?.name : "Team 1";
-    let t2 = m.teamInfo ? m.teamInfo[1]?.name : "Team 2";
-    let s1 = m.score && m.score[0] ? `${m.score[0].r}/${m.score[0].w} (${m.score[0].o} ov)` : "Yet to bat";
-    let s2 = m.score && m.score[1] ? `${m.score[1].r}/${m.score[1].w} (${m.score[1].o} ov)` : "Yet to bat";
-    let isLive = m.matchStarted && !m.matchEnded;
-    h += `<div class="match ${isLive?'live':''}"><div style="display:flex;justify-content:space-between"><b>${m.name}</b><span>${isLive?'<span class="liveDot">● LIVE</span>': m.matchEnded? 'FINISHED' : 'UPCOMING'}</span></div><div class="team"><span>${t1}</span><span class="score">${s1}</span></div><div class="team"><span>${t2}</span
+  let h="";
+  list.slice(0,15).forEach((m,i)=>{
+    let isLive = m.state=="Live" || m.status.toLowerCase().includes("need") || m.status.toLowerCase().includes("live");
+    h+=`<div class="match ${isLive?'live':''}"><div style="display:flex;justify-content:space-between"><b>${m.series||''}</b><span>${isLive?'<span class="liveDot">● LIVE</span>':'RECENT'}</span></div><b>${m.name}</b><div class="team"><span>${m.team1}</span><span class="score">${m.s1}</span></div><div class="team"><span>${m.team2}</span><span class="score">${m.s2}</span></div><p style="color:#d32f2f;font-weight:bold">${m.status}</p><p style="font-size:12px;color:#666">Venue: ${m.venue||'TBA'}</p><a href="https://tamashaweb.com/" target="_blank"><button class="red">▶ Watch on Tamasha (Pakistan)</button></a><button class="dark" onclick="showOne(${i})">💬 View Status</button></div>`;
+  });
+  document.getElementById('liveMatches').innerHTML=h;
+}
+function showOne(i){ let m=allMatches[i]; document.getElementById('commentaryBox').innerHTML=`<div class="commentary"><b>${m.name}</b><br>${m.status}<br>Venue: ${m.venue||'TBA'}</div>`; }
+async function loadSchedule(){
+  document.getElementById('scheduleList').innerHTML="Loading...";
+  try{
+    let data = await fetchCricbuzz("upcoming");
+    let list = parseMatches(data);
+    let h="<table><tr><th>Match</th><th>Series</th><th>Status</th><th>Venue</th></tr>";
+    list.slice(0,20).forEach(m=>{ h+=`<tr><td>${m.team1} vs ${m.team2}</td><td>${m.series}</td><td>${m.status}</td><td>${m.venue}</td></tr>`; });
+    h+="</table>"; document.getElementById('scheduleList').innerHTML=h;
+  }catch(e){ document.getElementById('scheduleList').innerHTML="Schedule loading... <a href='https://www.espncricinfo.com/series' target='_blank'>ESPN Schedule</a>"; }
+}
+function filterT(t){ let list = t=='all'? ['ICC T20 World Cup - Pakistan vs India','PSL - Karachi Kings vs Lahore Qalandars','IPL - MI vs CSK','Asia Cup - Pakistan vs Sri Lanka'] : t=='ICC'? ['ICC T20 World Cup','ICC ODI World Cup 2027'] : t=='PSL'? ['PSL - All Matches'] : ['IPL - All Matches']; document.getElementById('tournamentList').innerHTML=list.map(x=>`<div style="border:1px solid #eee;padding:10px;border-radius:10px;margin:6px 0">${x} <button class="small" onclick="showPage('schedule')">View Schedule</button></div>`).join(''); }
+function acceptCookie(){ document.getElementById('cookie').style.display='none'; }
+function tick(){ document.getElementById('liveClock').innerText='Last Updated: '+new Date().toLocaleTimeString()+' | Auto Refresh: 60 sec'; }
+setInterval(tick,1000); tick();
+setInterval(loadLive, 60000);
+loadLive(); filterT('all');
+</script>
+</body>
+</html>
